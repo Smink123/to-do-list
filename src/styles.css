@@ -1,0 +1,46 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    background-color: wheat;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+#totalListOptionBar {
+    background-color: aliceblue;
+}
+
+#listArea {
+    background-color: aqua;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.list {
+    background-color: violet;
+    width: 400px;
+    height: 600px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.newListName {
+    text-align: center;
+    cursor: pointer;
+}
+
+#listName {
+    background-color: transparent;
+}
+
+#submitListName {
+}
