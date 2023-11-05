@@ -1,21 +1,53 @@
+@font-face {
+    font-family: 'spaceGrotesk';
+    src: url('./SpaceGrotesk-VariableFont_wght.ttf') format('truetype');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'lexend';
+    src: url('./LexendDeca-VariableFont_wght.ttf') format('truetype');
+    font-style: normal;
+}
+
 * {
     box-sizing: border-box;
 }
 
 body {
     width: 100vw;
-    background-color: wheat;
+    background-color: #e4e5ebff;
     display: flex;
     flex-direction: column;
     margin: 0;
 }
 
 #totalListOptionBar {
-    background-color: aliceblue;
+    background-color: #e4e5ebff;
+    border-bottom: 1px solid black;
+    padding: 20px;
+}
+
+#totalListOptionBar h1 {
+    font-size: 5rem;
+    margin: 0;
+    font-family: 'spaceGrotesk';
+}
+
+/* new list button */
+.createList {
+    background-color: black;
+    color: aliceblue;
+    border: none;
+    padding: 20px;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-family: 'spaceGrotesk';
+    font-weight: 100;
 }
 
 #listArea {
-    background-color: aqua;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -28,19 +60,101 @@ body {
     background-color: violet;
     width: 400px;
     height: 600px;
-    margin: 20px;
+    margin-top: 80px;
+    margin-right: 40px;
     display: flex;
     flex-direction: column;
+    border-radius: 40px;
+    border: 6px solid black;
 }
 
+/* list name */
 .newListName {
-    text-align: center;
-    cursor: pointer;
+    color: black;
+    font-size: 2rem;
+    margin: 0px;
+    text-align: left;
+    height: auto;
+    font-family: 'spaceGrotesk';
+    cursor: default;
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px 20px 0 20px;
+    overflow: scroll;
 }
 
 #listName {
     background-color: transparent;
+    border: none; /* Removes the default border */
+    outline: none;
+}
+
+#deleteList {
+    background-color: aqua;
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    min-height: 30px;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    background-color: black;
+    cursor: pointer;
+}
+
+/* name change area */
+.nameArea {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    height: 40px;
+    padding: 0px 20px 20px 20px;
+    margin: 0;
+    border-bottom: 1px solid black;
+}
+
+.newListNameTitle {
+    color: black;
+    cursor: pointer;
+    font-size: 1rem;
+    margin: 0;
+    font-family: 'lexend';
+    font-weight: 100;
+}
+
+.nameChangeArea {
+    min-width: 50%;
+    max-width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.nameChangeArea input {
+    font-family: 'lexend';
+    font-weight: 100;
+    font-size: 1rem;
+}
+
+.nameChangeArea input::placeholder {
+    color: white;
 }
 
 #submitListName {
+    background-color: black;
+    border: none;
+    color: aliceblue;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
 }

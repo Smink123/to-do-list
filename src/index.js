@@ -1,10 +1,24 @@
 import "./styles.css";
+
+const listArea = document.getElementById('listArea')
+
 class TaskList {
     constructor() {
-        this.listArea = document.getElementById('listArea');
         this.list = document.createElement('div');
         this.list.classList.add('list');
-        this.listArea.appendChild(this.list);
+        listArea.appendChild(this.list);
+
+        this.title = document.createElement('div');
+        this.title.classList.add('title');
+        this.list.appendChild(this.title)
+
+        this.nameArea = document.createElement('div');
+        this.nameArea.classList.add('nameArea');
+        this.list.appendChild(this.nameArea);
+
+        this.nameChangeArea = document.createElement('div');
+        this.nameChangeArea.style.display = 'none';
+        this.nameChangeArea.classList.add('nameChangeArea');
 
         this.createTitle('list', 'listHeader');
 
@@ -39,21 +53,27 @@ class TaskList {
         const newListName = document.createElement('p');
         newListName.classList.add('newListName');
         newListName.textContent = 'default list name'
-        this.list.appendChild(newListName);
+        this.title.appendChild(newListName);
     
         const changeNameText = document.createElement('p');
-        changeNameText.classList.add('newListName');
-        changeNameText.textContent = 'want to change list name?'
-        this.list.appendChild(changeNameText);
+        changeNameText.classList.add('newListNameTitle');
+        changeNameText.textContent = 'change name'
+        this.nameArea.appendChild(changeNameText);
     
         const listName = this.createInput('write your list name', 'text', 'listName', 'none');
-        this.list.appendChild(listName);
+        this.nameChangeArea.appendChild(listName);
     
-        const submitButton = this.createButton('submit list name', 'submitListName');
+        const submitButton = this.createButton('→', 'submitListName');
         submitButton.style.display = 'none';
-        this.list.appendChild(submitButton);
+        this.nameChangeArea.appendChild(submitButton);
+
+        this.nameArea.appendChild(this.nameChangeArea)
     
         changeNameText.addEventListener('click', () => {
+            this.nameChangeArea.style.display = 'flex';
+            this.nameChangeArea.style.maxWidth = '100%';
+            this.nameChangeArea.style.minWidth = '100%';
+            changeNameText.style.display = 'none'
             submitButton.style.display = 'block';
             listName.style.display = 'block';
         });
@@ -64,6 +84,8 @@ class TaskList {
             listTitle.value = '';
             submitButton.style.display = 'none';
             listName.style.display = 'none';
+            this.nameChangeArea.style.display = 'none';
+            changeNameText.style.display = 'block'
         });
     }
     
@@ -95,18 +117,22 @@ class TaskList {
     }
 
     deleteList() {
-        const deleteWholeButton = this.createButton('delete list?', 'deleteList');
-        deleteWholeButton.addEventListener('click', () => this.listArea.removeChild(this.list));
+        const deleteWholeButton = this.createButton('x', 'deleteList');
+        deleteWholeButton.addEventListener('click', () => listArea.removeChild(this.list));
 
-        this.list.appendChild(deleteWholeButton);
+        this.title.appendChild(deleteWholeButton);
     }
 }
 
+const noItemsToShow = document.getElementById('noItems')
+
 const createList = document.createElement('button');
 createList.classList.add('createList');
-createList.textContent = 'create list';
+createList.textContent = '+ new list';
 totalListOptionBar.appendChild(createList);
 
 createList.addEventListener('click', () => {
+    noItemsToShow.style.display = 'none'
     new TaskList();
 });
+
