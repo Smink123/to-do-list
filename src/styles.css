@@ -26,6 +26,9 @@ body {
     background-color: #e4e5ebff;
     border-bottom: 1px solid black;
     padding: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 2;
 }
 
 #totalListOptionBar h1 {
@@ -53,13 +56,15 @@ body {
     flex-wrap: wrap;
     width: 100%;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    z-index: 1;
 }
 
 .list {
     background-color: violet;
+    min-height: 600px;
     width: 400px;
-    height: 600px;
+    height: auto;
     margin-top: 80px;
     margin-right: 40px;
     display: flex;
@@ -84,7 +89,6 @@ body {
     flex-direction: row;
     justify-content: space-between;
     padding: 20px 20px 0 20px;
-    overflow: scroll;
 }
 
 #listName {
@@ -116,6 +120,7 @@ body {
     height: 40px;
     padding: 0px 20px 20px 20px;
     margin: 0;
+    margin-bottom: 20px;
     border-bottom: 1px solid black;
 }
 
@@ -126,7 +131,26 @@ body {
     margin: 0;
     font-family: 'lexend';
     font-weight: 100;
+    position: relative;
 }
+
+.newListNameTitle::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: black;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.newListNameTitle:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
 
 .nameChangeArea {
     min-width: 50%;
@@ -143,10 +167,51 @@ body {
     font-family: 'lexend';
     font-weight: 100;
     font-size: 1rem;
+    width: 260px;
 }
 
 .nameChangeArea input::placeholder {
+    color: black;
+    font-family: 'lexend';
+}
+
+.inputTaskArea {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    padding: 20px 20px 0 20px;
+}
+
+#taskValue {
+    background-color: transparent;
+    font-size: 1.5rem;
+    font-family: 'lexend';
+    border: none;
+    font-weight: 100;
+    width: 260px;
+    color: black;
+    margin-bottom: 40px;
+}
+
+#taskValue::placeholder {
+    color: black;
+}
+
+.submitTask {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    min-height: 30px;
+    background-color: black;
     color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+}
+
+#taskValue:focus {
+    outline: none;
 }
 
 #submitListName {
@@ -157,4 +222,34 @@ body {
     height: 30px;
     border-radius: 50%;
     cursor: pointer;
+}
+
+li {
+    padding-left: 20px;
+    padding-right: 20px;
+    list-style: none;
+    font-size: 1.5rem;
+    font-family: 'lexend';
+}
+
+#deleteButton, #completeButton, #importantButton {
+    background-color: transparent;
+    outline: none;
+    display: inline;
+    width: auto;
+    font-family: 'lexend';
+    border: none;
+    font-weight: 100;
+    margin: 0;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.itemButtons {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-start;
+    padding-left: 20px;
+    margin-bottom: 40px;
 }

@@ -22,12 +22,17 @@ class TaskList {
 
         this.createTitle('list', 'listHeader');
 
-        this.inputTask = this.createInput('Enter your task...', 'text', 'taskValue', 'block');
-        this.list.appendChild(this.inputTask);
+        this.inputTaskArea = document.createElement('div');
+        this.inputTaskArea.classList.add('inputTaskArea');
+        this.list.appendChild(this.inputTaskArea);
 
-        this.submitTask = this.createButton('Add', 'submitTask');
+        this.inputTask = this.createInput('Enter your task...', 'text', 'taskValue', 'block');
+        this.inputTaskArea.appendChild(this.inputTask);
+
+        this.submitTask = this.createButton('+', 'submitTask');
+        this.submitTask.classList.add('submitTask')
         this.submitTask.addEventListener('click', this.addTask);
-        this.list.appendChild(this.submitTask);
+        this.inputTaskArea.appendChild(this.submitTask);
 
         this.deleteList();
     }
@@ -94,21 +99,26 @@ class TaskList {
         const taskAdded = this.inputTask.value;
         if (taskAdded !== '') {
             const listItem = document.createElement('li');
+            listItem.classList.add('listItem')
             listItem.textContent = taskAdded;
 
-            const deleteButton = this.createButton('Delete', 'deleteButton');
+            const itemButtons = document.createElement('div');
+            itemButtons.classList.add('itemButtons');
+
+            const deleteButton = this.createButton('delete', 'deleteButton');
             deleteButton.addEventListener('click', () => this.list.removeChild(listItem));
 
-            const completed = this.createButton('completed?', 'completeButton');
+            const completed = this.createButton('completed', 'completeButton');
             completed.addEventListener('click', () => listItem.style.color = 'red');
 
             const important = this.createButton('important', 'importantButton');
             important.addEventListener('click', () => listItem.style.fontWeight = 'bold');
 
-            listItem.appendChild(deleteButton);
-            listItem.appendChild(completed);
-            listItem.appendChild(important);
             this.list.appendChild(listItem);
+            this.list.appendChild(itemButtons)
+            itemButtons.appendChild(deleteButton);
+            itemButtons.appendChild(completed);
+            itemButtons.appendChild(important);
 
             this.inputTask.value = '';
         } else {
@@ -118,8 +128,10 @@ class TaskList {
 
     deleteList() {
         const deleteWholeButton = this.createButton('x', 'deleteList');
-        deleteWholeButton.addEventListener('click', () => listArea.removeChild(this.list));
-
+        deleteWholeButton.addEventListener('click', () => {
+            listArea.removeChild(this.list);
+            toggleNoListText(); // Call the function after removing the list
+        });
         this.title.appendChild(deleteWholeButton);
     }
 }
@@ -132,7 +144,17 @@ createList.textContent = '+ new list';
 totalListOptionBar.appendChild(createList);
 
 createList.addEventListener('click', () => {
-    noItemsToShow.style.display = 'none'
     new TaskList();
+    toggleNoListText();
+    console.log(listArea)
 });
 
+//selects all elements with a class of '.list' within the listArea + returns a NodeList.
+function toggleNoListText() {
+    const lists = listArea.querySelectorAll('.list');
+    if (lists.length === 0) {
+        noItemsToShow.style.display = 'block';
+    } else {
+        noItemsToShow.style.display = 'none';
+    }
+}
