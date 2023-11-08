@@ -24,17 +24,46 @@ body {
 
 #totalListOptionBar {
     background-color: #e4e5ebff;
-    border-bottom: 1px solid black;
+    opacity: 0.9;
+    /*border-bottom: 1px solid black;*/
     padding: 20px;
     position: sticky;
     top: 0;
     z-index: 2;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: auto;
 }
 
 #totalListOptionBar h1 {
     font-size: 5rem;
     margin: 0;
     font-family: 'spaceGrotesk';
+    width: auto;
+}
+
+.bottomRowBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0;
+    width: auto;    
+}
+
+.dateTime {
+    border: none;
+    padding: 20px;
+    border-radius: 40px;
+    font-size: 1.5rem;
+    font-family: 'spaceGrotesk';
+    font-weight: 100;
+    margin: 0 0 0 20px;
+    background-color: black;
+    color: aliceblue;
+    cursor: default;
+    
 }
 
 /* new list button */
@@ -56,12 +85,56 @@ body {
     flex-wrap: wrap;
     width: 100%;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     z-index: 1;
+    margin-bottom: 80px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+#noItems {
+    margin-top: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'spaceGrotesk';
+    color: #d0d2de;
+    font-size: 10rem;
+    width: 70vw;
+    text-align: center;
+    animation: fadeFromBottom 1s ease;
+}
+
+@keyframes fadeFromBottom {
+    0% {
+        transform: translateY(50px);
+        /*opacity: 0;*/
+    }
+    100% {
+        transform: translateY(0);;
+        /*opacity: 1;*/
+    }
+}
+
+@media (max-width: 900px) {
+    #totalListOptionBar {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #noItems {
+        font-size: 5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    #totalListOptionBar h1 {
+        text-align: center;
+    }
 }
 
 .list {
-    background-color: violet;
     min-height: 600px;
     width: 400px;
     height: auto;
@@ -71,7 +144,17 @@ body {
     flex-direction: column;
     border-radius: 40px;
     border: 6px solid black;
+    animation: fadeIn 0.2s ease;
 }
+
+@keyframes fadeIn{
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
 
 /* list name */
 .newListName {
@@ -82,6 +165,10 @@ body {
     height: auto;
     font-family: 'spaceGrotesk';
     cursor: default;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    max-width: 100%;
 }
 
 .title {
@@ -89,25 +176,28 @@ body {
     flex-direction: row;
     justify-content: space-between;
     padding: 20px 20px 0 20px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px
 }
 
 #listName {
     background-color: transparent;
-    border: none; /* Removes the default border */
+    border: none;
     outline: none;
 }
 
 #deleteList {
-    background-color: aqua;
     width: 30px;
     height: 30px;
     min-width: 30px;
     min-height: 30px;
     border: none;
     border-radius: 50%;
-    color: white;
+    color: aliceblue;
     background-color: black;
     cursor: pointer;
+    margin-left: 20px;
 }
 
 /* name change area */
@@ -121,36 +211,8 @@ body {
     padding: 0px 20px 20px 20px;
     margin: 0;
     margin-bottom: 20px;
-    border-bottom: 1px solid black;
+    background-color: rgba(0, 0, 0, 0.1);
 }
-
-.newListNameTitle {
-    color: black;
-    cursor: pointer;
-    font-size: 1rem;
-    margin: 0;
-    font-family: 'lexend';
-    font-weight: 100;
-    position: relative;
-}
-
-.newListNameTitle::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  transform: scaleX(0);
-  height: 1px;
-  bottom: 0;
-  left: 0;
-  background-color: black;
-  transform-origin: bottom right;
-  transition: transform 0.25s ease-out;
-}
-
-.newListNameTitle:hover:after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-  }
 
 .nameChangeArea {
     min-width: 50%;
@@ -184,7 +246,7 @@ body {
 }
 
 #taskValue {
-    background-color: transparent;
+    background: transparent;
     font-size: 1.5rem;
     font-family: 'lexend';
     border: none;
@@ -198,13 +260,17 @@ body {
     color: black;
 }
 
+#taskValue:focus::placeholder,  .nameChangeArea input:focus::placeholder{
+    color: transparent;
+  }
+
 .submitTask {
     width: 30px;
     height: 30px;
     min-width: 30px;
     min-height: 30px;
     background-color: black;
-    color: white;
+    color: aliceblue;
     border-radius: 50%;
     cursor: pointer;
     border: none;
@@ -227,22 +293,61 @@ body {
 li {
     padding-left: 20px;
     padding-right: 20px;
-    list-style: none;
     font-size: 1.5rem;
     font-family: 'lexend';
+    margin-bottom: 6px;
+    font-weight: 100;
+    cursor: default;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+     white-space: normal;
+     max-width: 100%;
 }
 
+.newListNameTitle {
+    color: black;
+    cursor: pointer;
+    font-size: 1rem;
+    margin: 0;
+    font-family: 'lexend';
+    font-weight: 100;
+    position: relative;
+}
+
+.newListNameTitle:hover, #deleteButton:hover, #completeButton:hover, #importantButton:hover {
+    font-weight: 300;
+}
+
+.newListNameTitle::after, #deleteButton::after, #completeButton::after, #importantButton::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: black;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.newListNameTitle:hover:after, #deleteButton:hover:after, #completeButton:hover:after, #importantButton:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
 #deleteButton, #completeButton, #importantButton {
-    background-color: transparent;
     outline: none;
-    display: inline;
     width: auto;
     font-family: 'lexend';
     border: none;
     font-weight: 100;
-    margin: 0;
     font-size: 1rem;
     cursor: pointer;
+    position: relative;
+    margin-right: 15px;
+    padding: 0;
+    background-color: transparent;
 }
 
 .itemButtons {
@@ -251,5 +356,14 @@ li {
     width: 100%;
     justify-content: flex-start;
     padding-left: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
+}
+
+button:hover, #deleteList:hover, #submitListName:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: background-color 0.2s ease-in-out;
+}
+
+button, #deleteList, #ßsubmitListName {
+        transition: background-color 0.2s ease-in-out;
 }
