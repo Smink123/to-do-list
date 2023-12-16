@@ -2,6 +2,15 @@ import "./styles.css";
 
 const listArea = document.getElementById("listArea");
 
+function createElement(elementType, className, id, parentElement) {
+  const newElement = document.createElement(elementType)
+  newElement.classList.add(className)
+  if (id !== '') {
+    newElement.id = id
+  }
+  parentElement.appendChild(newElement)
+}
+
 class TaskList {
   constructor() {
     this.list = document.createElement("div");
@@ -9,13 +18,8 @@ class TaskList {
     this.list.style.background = listBackground(gradientOptions);
     listArea.appendChild(this.list);
 
-    this.title = document.createElement("div");
-    this.title.classList.add("title");
-    this.list.appendChild(this.title);
-
-    this.nameArea = document.createElement("div");
-    this.nameArea.classList.add("nameArea");
-    this.list.appendChild(this.nameArea);
+    this.title = createElement('div', 'title', '', this.list)
+    this.nameArea = createElement('div', 'nameArea', '', this.list)
 
     this.nameChangeArea = document.createElement("div");
     this.nameChangeArea.style.display = "none";
@@ -23,9 +27,7 @@ class TaskList {
 
     this.createTitle("list", "listHeader");
 
-    this.inputTaskArea = document.createElement("div");
-    this.inputTaskArea.classList.add("inputTaskArea");
-    this.list.appendChild(this.inputTaskArea);
+    this.inputTaskArea = createElement('div', 'inputTaskArea', '', this.list)
 
     this.inputTask = this.createInput(
       "enter your task...",
