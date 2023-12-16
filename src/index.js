@@ -2,24 +2,17 @@ import "./styles.css";
 
 const listArea = document.getElementById("listArea");
 
-function createElement(elementType, className, id, parentElement) {
-  const newElement = document.createElement(elementType)
-  newElement.classList.add(className)
-  if (id !== '') {
-    newElement.id = id
-  }
-  parentElement.appendChild(newElement)
-}
-
 class TaskList {
   constructor() {
+
     this.list = document.createElement("div");
     this.list.classList.add("list");
     this.list.style.background = listBackground(gradientOptions);
     listArea.appendChild(this.list);
 
-    this.title = createElement('div', 'title', '', this.list)
-    this.nameArea = createElement('div', 'nameArea', '', this.list)
+    this.title = this.creatingElement('div', 'title', '', this.list)
+
+    this.nameArea = this.creatingElement('div', 'nameArea', '', this.list)
 
     this.nameChangeArea = document.createElement("div");
     this.nameChangeArea.style.display = "none";
@@ -27,7 +20,7 @@ class TaskList {
 
     this.createTitle("list", "listHeader");
 
-    this.inputTaskArea = createElement('div', 'inputTaskArea', '', this.list)
+    this.inputTaskArea = this.creatingElement('div', 'inputTaskArea', '', this.list)
 
     this.inputTask = this.createInput(
       "enter your task...",
@@ -43,6 +36,16 @@ class TaskList {
     this.inputTaskArea.appendChild(this.submitTask);
 
     this.deleteList();
+  }
+
+  creatingElement(elementType, className, id, parentElement) {
+    const newElement = document.createElement(elementType);
+    newElement.classList.add(className);
+    if (id !== '') {
+      newElement.id = id;
+    }
+    parentElement.appendChild(newElement);
+    return newElement;
   }
 
   createInput(placeholder, type, id, displayDefault) {
